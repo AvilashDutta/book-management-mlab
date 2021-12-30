@@ -1,0 +1,38 @@
+server:
+  tomcat:
+    accept-count: 300
+  port: 8082
+
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://127.0.0.1:3306/mlab}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 10
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: false
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+        enable_lazy_load_no_trans: true
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+application:
+  request-id-header: request-id
+  token-expiry-minute: 30
+  token-prefix: Bearer
+  jwt-secret: avil@sh
+  auth-header-name: Authorization
+  token-validation-regex: ^Bearer\s[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$
+  seeder-enabled: true
+  api-version: 0.0.1
+  max-issue-book: 5
