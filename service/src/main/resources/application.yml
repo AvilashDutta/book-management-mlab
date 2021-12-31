@@ -69,7 +69,6 @@ application:
       baseline-on-migrate: true
 
   application:
-    request-id-header: request-id
     token-expiry-minute: 30
     token-prefix: Bearer
     jwt-secret: avil@sh

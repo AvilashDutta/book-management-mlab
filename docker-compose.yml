@@ -1,4 +1,4 @@
-version: '1.0'
+version: '3.9'
 services:
   book-mysql-service:
     restart: always
@@ -13,7 +13,7 @@ services:
     networks:
       - book-network
     volumes:
-      - ~/data/mlab-db:/var/lib/mysql
+      - db-data:/var/lib/mysql
 
   book-service:
     depends_on:
@@ -29,12 +29,11 @@ services:
       DB_USERNAME: root
       DB_PASSWORD: root
       DB_URL: jdbc:mysql://book-mysql-service:3306/book_db
-    volumes:
-      - ~/data/mlab:/tmp
     networks:
       - book-network
     restart: on-failure
-
+volumes:
+   db-data:
 networks:
   book-network:
     driver: bridge
