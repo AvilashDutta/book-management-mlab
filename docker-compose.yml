@@ -1,0 +1,40 @@
+version: '1.0'
+services:
+  book-mysql-service:
+    restart: always
+    image: woahbase/alpine-mysql:latest
+    container_name: mlab_mysql_db_container
+    environment:
+      MYSQL_USER: root
+      MYSQL_USER_PWD: root
+      MYSQL_USER_DB: book_db
+    ports:
+      - 0.0.0.0:3306:3306
+    networks:
+      - book-network
+    volumes:
+      - ~/data/mlab-db:/var/lib/mysql
+
+  book-service:
+    depends_on:
+      - book-mysql-service
+    build:
+      context: .
+    image: mlab-book-management:latest
+    container_name: mlab-book-management-app
+    ports:
+      - 0.0.0.0:8080:8080
+    environment:
+      ACTIVE_PROFILE: prod
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      DB_URL: jdbc:mysql://book-mysql-service:3306/book_db
+    volumes:
+      - ~/data/mlab:/tmp
+    networks:
+      - book-network
+    restart: on-failure
+
+networks:
+  book-network:
+    driver: bridge
