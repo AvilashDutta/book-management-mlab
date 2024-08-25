@@ -4,12 +4,12 @@ A simple Rset API project for book management based on Spring Boot
 
 # CI Integration
 
-    # Adding our first workflow
+     Adding our first workflow
 All GitHub repositories come with Actions enabled by default. Browse to your repository, and you’ll see a tab labeled Actions. All you need to do is tell your repository to make use of Actions in your development process.
 
 Actions run workflows, which are usually associated with specific stages in your development process, for example, a workflow that runs when a pull request opens. Inside workflows are jobs—the individual steps in a workflow. These workflows, and the jobs inside them, are defined in YAML-formatted files inside your repository in a directory called .github/workflows. In this project the workflow is triggered when a push or pull request is applied to master branch.  
 
-    # Setup java and build with maven 
+     Setup java and build with maven 
 Let’s create a workflow to build the project when we open a new pull request or push to master branch. We create a YAML file to hold this workflow.
 ```yaml
     name: Java CI with Maven
